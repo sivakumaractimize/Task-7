@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
+      rel="stylesheet"
+    />
+    <title>Form validation</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+    <style>
+
+        .error{
+            color: red;
+        }
+        #main{
+            background-color: rgb(175, 211, 199);
+        }
+    </style>
+  </head>
+  <body >
+    <!-- Example Code -->
+ <div class="container  col-md-6" id="main" >
+
+    <h1 class="text-center">Registration Form</h1>
+
+
+ 
+    <form class="col g-2 " id="form">
+      <div class="col-md-8  mx-auto">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" />
+        <p class="error" id="nameErr"></p>
+
+
+      </div>
+      <div class="col-md-8 mx-auto">
+        <label class="form-label">Date Of Birth</label>
+        <input type="date" class="form-control"  id="dob"/>
+        <p class="error" id="dobErr"></p>
+      </div>
+      <div class="col-md-8 mx-auto">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" />
+        <p class="error" id="emailErr"></p>
+      </div>
+      <div class="col-md-8  mx-auto">
+        <label for="inputPassword4" class="form-label">Mobile</label>
+        <input type="text" class="form-control" id="mobile"/>
+        <p class="error" id="mobErr"></p>
+      </div>
+
+      <div class="col-md-8 mx-auto">
+        <label for="inputPassword4" class="form-label">Gender</label>
+        <div>
+          <div class="form-check">
+            <input
+              type="radio"
+              name="radio-stacked"
+              id="male"
+              
+            />
+            <label class="form-check-label" for="validationFormCheck2"
+              >Male</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              type="radio"
+              name="radio-stacked"
+              id="female";
+            
+            />
+            <label class="form-check-label" for="validationFormCheck2"
+              >Female</label
+            >
+          </div>
+        </div>
+        <p class="error" id="genErr"></p>
+      </div>
+
+      <div class="col-md-8 mx-auto">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" />
+        <p class="error" id="cityErr"></p>
+      </div>
+      <div class="col-md-8 mx-auto">
+        <label for="inputState" class="form-label">country</label>
+        <select id="inputCountry" class="form-select">
+          <option value="" >Choose...</option>
+          <option value="india">India</option>
+          <option value="china">china</option>
+          <option value="usa">USA</option>
+          <option value="japan" >JAPAN</option>
+          <option value="pakistan" >PAKISTHAN</option>
+          <option value="narway" >NARWAY</option>
+          <option >SOUDI</option>
+        </select>
+        <p class="error" id="countryErr"></p>
+      </div>
+      <div class="col-md-8 mx-auto">
+        <label for="inputZip" class="form-label">Pincode</label>
+        <input type="text" class="form-control" id="zip" />
+        <p class="error" id="zipErr"></p>
+      </div>
+      <div class=" col-md-8 mx-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="check" />
+          <label class="form-check-label" for="gridCheck"> Agree Terms and conditions </label>
+          <p class="error" id="checkErr"></p>
+        </div>
+      </div>
+      
+
+          <!-- Button trigger modal -->
+          <div class=" col-md-8 mx-auto text-center"> <!-- Centering the button -->
+            <button type="button" class="btn btn-success col-md-4  mb-4 ms-auto" onclick="validForm()">
+              Submit
+            </button>
+          </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Thank you...</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Details submit successfully....!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    </form>
+
+</div>
+
+<script>
+
+
+       
+
+        function validForm()
+        {
+
+              let result=true;
+
+               var name = document.getElementById("name").value;
+
+                  if (name === "") {
+                     document.getElementById("nameErr").innerHTML = "Please enter name";
+                   document.getElementById("name").style.borderColor = "red";
+                   result= false;
+                } else if (name.charAt(0) >= 'A' && name.charAt(0) <= 'Z') {
+                var containsNumber = false;
+                for (var i = 0; i < name.length; i++) {
+                    if (!isNaN(parseInt(name[i]))) {
+                        containsNumber = true;
+                        break;
+                    }
+                }
+                if (!containsNumber) {
+                    document.getElementById('nameErr').innerHTML = "";
+                    document.getElementById("name").style.borderColor = "green";
+                } else {
+                    document.getElementById("nameErr").innerHTML = "Name should not contain numbers";
+                    document.getElementById("name").style.borderColor = "red";
+                    result=false;
+
+                }
+            } else {
+                document.getElementById("nameErr").innerHTML = "Name first letter should be capital";
+                document.getElementById("name").style.borderColor = "red";
+                result=false;
+
+            }
+
+      
+
+            var dob=document.getElementById("dob").value;
+
+            
+            if(dob==="")
+
+            {
+                document.getElementById("dobErr").innerHTML="Please enter dob";
+
+                document.getElementById("dob").style.borderColor="red"
+                result=false;
+
+            }else{
+                document.getElementById('dobErr').innerHTML=""
+                document.getElementById("dob").style.borderColor="green"
+            }
+
+
+
+
+          var email = document.getElementById("email").value;
+
+             if (email === "") {
+                 document.getElementById("emailErr").innerHTML = "Please enter an email";
+                 result=false;
+             } else if (email.indexOf("@") === -1) {
+                 document.getElementById("emailErr").innerHTML = "Please enter a valid email";
+                 result =false;
+             } else {
+                 document.getElementById('emailErr').innerHTML = "";
+                 document.getElementById("email").style.borderColor="green"
+
+             }
+
+
+ 
+               var mobile=document.getElementById("mobile").value;
+
+            
+              if(mobile==="")
+
+            {
+            document.getElementById("mobErr").innerHTML="Please enter mobile";
+            result=false;
+
+             }
+    
+           else{
+
+                  if(mobile.length>=10 && mobile.length<=10)
+
+                  {
+
+                    document.getElementById('mobErr').innerHTML=""
+                    document.getElementById("mobile").style.borderColor="green"
+
+
+                  }
+                  else
+                  {
+                    document.getElementById('mobErr').innerHTML="number Should be 10 digits";
+                    result=false;
+                  }
+
+
+                      
+              }
+       
+
+        
+
+
+        var city  =document.getElementById("city").value;
+        console.log(city);
+
+            
+         if(city ==="")
+
+       {
+        document.getElementById("cityErr").innerHTML="Please enter city";
+        result=false;
+
+        }
+    
+       else{
+
+                   document.getElementById('cityErr').innerHTML=""
+                    document.getElementById("city").style.borderColor="green"
+          }
+    
+
+          var country=document.getElementById("inputCountry").value;
+          
+
+                      
+         if(country ==="")
+
+          {
+             document.getElementById("countryErr").innerHTML="Please select  country";
+             result=false;
+
+           }
+
+          else{
+           document.getElementById('countryErr').innerHTML=""
+           document.getElementById("inputCountry").style.borderColor="green"
+            }
+
+
+
+       
+
+        var male=document.getElementById("male").checked;
+        var female=document.getElementById("female").checked;
+
+        if(!male && !female)
+        {
+
+            document.getElementById("genErr").innerHTML="Please select gender";
+            result=false;
+        }
+        else{
+
+            document.getElementById('genErr').innerHTML=""
+            
+        }
+
+
+
+        var zip=document.getElementById("zip").value;
+
+        if(zip==="")
+        {
+            document.getElementById("zipErr").innerHTML="please enter zip code"
+            result=false;
+        }
+        else
+        {
+            if(zip.length==6 && zip.length==6)
+             {
+
+                    document.getElementById('zipErr').innerHTML=""
+                    document.getElementById("zip").style.borderColor="green"
+
+
+             }
+             else
+             
+             {
+             document.getElementById("zipErr").innerHTML="pin code should be 6 digits";
+             result=false;
+             }
+          
+        }
+
+
+        var chek=document.getElementById("check").checked;
+
+        if(!chek)
+        {
+            document.getElementById("checkErr").innerHTML="please conform the check box"
+            result=false;
+        }
+        else
+        {
+            document.getElementById("checkErr").innerHTML="";
+
+        }
+
+
+        if(result)
+        {
+          let modal= new bootstrap.Modal( document.getElementById("modal"));
+          modal.show();
+          document.getElementById("form").reset();
+        }
+
+    }
+
+        
+
+
+
+
+</script>
+  </body>
+</html>
